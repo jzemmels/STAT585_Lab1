@@ -16,7 +16,7 @@ cppFunction('int add(int x, int y, int z) {
   int sum = x + y + z;
   return sum;
 }')
-# add works like a regular R function
+add works like a regular R function
 add
 add(1, 2, 3)
 
