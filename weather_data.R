@@ -12,3 +12,12 @@ stations <- stations %>%
 #How to unpack the .tar.gz file:
 #untar("./ushcn.tavg.latest.raw.tar.gz")
 
+setwd("./ushcn.v2.5.5.20190204/") #moves into folder of interest
+
+#ls lists all files in the directory. wc stands for "word count". -l counts by lines. Outputs 1218
+shell("ls | wc -l")
+
+#ls lists all files in the directory. grep is a text search function that searches for Ft Dodge's Coop Observer ID. 
+#Outputs USH00132999.raw.tavg
+shell("ls -1 | grep USH00132999") 
+setwd("..") #Returns to previous working directory
