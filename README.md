@@ -9,7 +9,7 @@ Deliverable 2: A major issue that we all experienced was the need to download a 
 ## What to do when things don't work?
 I am attempting to knit Hadley Wickham's Advanced R book together and am unable to use the Rcpp functions that he calls in the text. In particular, the following function call doesn't seem to work well:
 
-{r add}
+```{r add}
 library(Rcpp)
 
 cppFunction('int add(int x, int y, int z) {
@@ -19,7 +19,15 @@ cppFunction('int add(int x, int y, int z) {
 add works like a regular R function
 add
 add(1, 2, 3)
+```
 
 
 I attempted to uninstall and re-install the Rcpp package from Rstudio, but this didn't seem to solve the issue. The error that I receive is the following.
 "Error in sourceCpp(code=code,env=env,rebuild=rebuild,cacheDir=cacheDir, : Error 1 occurred building shared library. Calls: local ... withVisible -> eval -> eval -> cppFunction -> sourceCpp)"
+
+## US Weather Stations
+
+## More weather data
+Deliverable:
+  Number of files inside the folder: 1218
+  Name of file containing Ft. Dodge Coop Observer ID: USH00132999.raw.tavg

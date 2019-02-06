@@ -1,4 +1,5 @@
 library(tidyverse)
+library(zipcode)
 
 stations <- read_fwf("./ushcn-v2.5-stations.txt",
                      fwf_cols(countryCode = c(1,2),networkCode = c(3,4), IDPlaceholders = c(4,5),coopID = c(6,11),
@@ -8,6 +9,24 @@ stations <- read_fwf("./ushcn-v2.5-stations.txt",
 stations <- stations %>%
   mutate(elevation = as.numeric(elevation)) %>%
   mutate(UTCOffset = as.integer(UTCOffset))
+
+data("zipcode.civicspace")
+
+timeZones <- zipcode.civicspace %>%
+  select(c(state,timezone)) %>%
+  group_by(state) %>%
+  mutate(timezone = floor(mean(timezone))) %>%
+  unique()
+
+stations <- stations %>%
+  left_join(timeZones,by=c("state")) %>%
+  mutate(timezone = factor(timezone,labels = c("Pacific","Mountain","Central","Eastern"))) 
+
+states <- map_data("state")
+
+ggplot(data = stations,aes(x=longitude,y=latitude)) + 
+  geom_point(aes(colour=timezone,alpha=elevation,size=elevation)) + 
+  geom_path(data=states,aes(x=long,y=lat,group=group))
 
 #How to unpack the .tar.gz file:
 #untar("./ushcn.tavg.latest.raw.tar.gz")
