@@ -41,8 +41,10 @@ shell("ls | wc -l")
 shell("ls -1 | grep USH00132999") 
 setwd("..") #Returns to previous working directory
 
+stations <- stations %>%
+  mutate(timeZone = factor(UTCOffset,labels =  c("Eastern","Central","Mountain","Pacific")))
+    
 # Plot elevation 
 ggplot() + 
-  geom_polygon(data = usa, aes(x=long, y = lat, group = group)) + 
-  geom_point(data = stations, mapping = aes(x = longitude, y = latitude, color = elevation))
-
+  geom_path(data = map_data("state"), aes(x=long, y = lat, group = group)) + 
+  geom_point(data = stations, mapping = aes(x = longitude, y = latitude, colour = timeZone,alpha=elevation,size=elevation))
