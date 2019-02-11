@@ -58,3 +58,14 @@ Deliverable:
   Number of files inside the folder: 1218
   
   Name of file containing Ft. Dodge Coop Observer ID: USH00132999.raw.tavg
+  
+Code:
+```{r message=FALSE}
+library(R.utils)
+data <- untar("ushcn.tavg.latest.raw.tar.gz",list=TRUE)  ## check contents
+str(data)
+
+#ls lists all files in the directory. grep is a text search function that searches for Ft Dodge's Coop Observer ID. 
+#Ft Dodge Code: USH00132999, Source: ftp://ftp.ncdc.noaa.gov/pub/data/ushcn/v2.5/ushcn-v2.5-stations.txt
+data[str_detect(data,"USH00132999")]
+```
